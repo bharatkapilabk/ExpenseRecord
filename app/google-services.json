@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "549219848378",
+    "firebase_url": "https://expenserecord-89ea5.firebaseio.com",
+    "project_id": "expenserecord-89ea5",
+    "storage_bucket": "expenserecord-89ea5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549219848378:android:81ecaf467a02112f",
+        "android_client_info": {
+          "package_name": "com.example.expenserecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549219848378-irmde20asitfjsvok38svm815kjberqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.expenserecord",
+            "certificate_hash": "30c1c09a9785226b218691d9e577ed23cd338bcb"
+          }
+        },
+        {
+          "client_id": "549219848378-qqh2ijt1sde4smvgqkr6k4sutl5apcqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxEtNm7LFLAXQdibud0R8JgF2bUZ-wj-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549219848378-qqh2ijt1sde4smvgqkr6k4sutl5apcqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

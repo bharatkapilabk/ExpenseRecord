@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawerLayout=findViewById(R.id.drawer);
@@ -77,18 +77,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int spnd_amt = 0;
+                String discr;
+                try {
+                    spnd_amt = Integer.parseInt(e2.getText().toString());
+                    discr = e1.getText().toString();
+                    current_spnd += spnd_amt;
+                    float progress_percent = (((float) current_spnd) / totalPmoney) * 100;
+                    progressBar.setProgress((int) progress_percent);
+                    createNotification((int) progress_percent);
 
-                int spnd_amt = Integer.parseInt(e2.getText().toString());
-                current_spnd += spnd_amt;
-                float progress_percent = (((float) current_spnd) / totalPmoney) * 100;
-                progressBar.setProgress((int) progress_percent);
-                createNotification((int) progress_percent);
-
-                boolean isInserted = mydb.insertdata(e1.getText().toString(), spnd_amt);
-                if (isInserted = true)
-                    Toast.makeText(MainActivity.this, "Inserted" + progress_percent, Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(MainActivity.this, "Not Inserted", Toast.LENGTH_LONG).show();
+                    boolean isInserted = mydb.insertdata(discr, spnd_amt);
+                    if (isInserted == true)
+                        Toast.makeText(MainActivity.this, "Inserted" + progress_percent, Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(MainActivity.this, "Not Inserted", Toast.LENGTH_LONG).show();
+                } catch (IllegalArgumentException e) {
+                    Toast.makeText(MainActivity.this, "Enter value", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -149,9 +155,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "view", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, SpendingsListView.class);
             startActivity(intent);
-        }
-        else if(id==R.id.delete){
-            Toast.makeText(this,"delete",Toast.LENGTH_LONG).show();
+        } else if (id == R.id.edit_pmoney) {
+
+            Intent i = new Intent(MainActivity.this, pocketmoney.class);
+            startActivity(i);
+            writeTotal(0);
+            Toast.makeText(this, "Enter new value", Toast.LENGTH_LONG).show();
         }
         else if(id==R.id.share){
             Toast.makeText(this,"share",Toast.LENGTH_LONG).show();
@@ -177,5 +186,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent loginIntent=new Intent(MainActivity.this, LoginActivity.class);
         startActivity(loginIntent);
         finish();
+    }
+    private void writeTotal(int totalPmoney) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("PocketMoney", totalPmoney);
+        editor.commit();
     }
 }
